@@ -1,0 +1,22 @@
+# Optional Render blueprint for the API. Fill the secrets in the Render dashboard (never commit them).
+services:
+  - type: web
+    name: chronovault-api
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    plan: starter            # always-on plan keeps the scheduler running (see report, Table 3.2, TBD-9)
+    envVars:
+      - { key: NODE_ENV, value: production }
+      - { key: MONGODB_URI, sync: false }
+      - { key: MASTER_KEY, sync: false }
+      - { key: INTEGRITY_KEY, sync: false }
+      - { key: JWT_SECRET, sync: false }
+      - { key: CLIENT_ORIGIN, sync: false }
+      - { key: SMTP_HOST, sync: false }
+      - { key: SMTP_PORT, value: "587" }
+      - { key: SMTP_USER, sync: false }
+      - { key: SMTP_PASS, sync: false }
+      - { key: MAIL_FROM, sync: false }
